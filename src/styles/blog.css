@@ -1,6 +1,8 @@
 
 body {
+  scroll-behavior: smooth
   @apply mt-10;
+  
 }
 
 h1 {
