@@ -1,11 +1,12 @@
 ---
+import Image from "astro/components/Image.astro";
 import { getCollection } from "astro:content";
-import BlogLayout from "src/layouts/BlogLayout.astro";
+import BlogLayout from "../../layouts/BlogLayout.astro";
 import type { GetStaticPaths } from "astro";
 
 export const getStaticPaths = (async () => {
-  const posts = await getCollection('blog');
-  return posts.map(p => ({
+  const posts = await getCollection("blog");
+  return posts.map((p) => ({
     params: { slug: p.slug },
     props: { post: p },
   }));
@@ -13,34 +14,45 @@ export const getStaticPaths = (async () => {
 
 const { post } = Astro.props;
 
-const frontmatter = post.data
+const frontmatter = post.data;
 
-const {Content, headings} = await post.render()
+const { Content, headings } = await post.render();
 //console.log(headings)
 ---
 
 <BlogLayout title={frontmatter.title}>
-  <h1 class="font-bold">{frontmatter.title}</h1>
-  <h4 class="text-sm">{frontmatter.author}</h4>
-
+  <a
+    href="/"
+    id="btn-back"
+    class="middle none center mr-3 rounded-lg bg-pink-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none my-4"
+    data-ripple-light="true"
+  >
+    Regresar
+  </a>
+  <!--content -->
+  <Image
+    class="object-cover h-56 w-full rounded-lg lg:w-64"
+    src={frontmatter.image}
+    alt={frontmatter.title}
+    width={600}
+    quality="low"
+    loading="lazy"
+  />
+  <Content />
 
   <!--tabla de contenidos -->
-<h3>
-    Tabla de contenidos
-</h3>
-<ol>
+  <h3>Tabla de contenidos</h3>
+  <ol>
     {
-        headings.map((heading, index) => (
-            <li>
-                <a href={`#${heading.slug}`}>{index + 1 } - {heading.text}</a>
-            </li>
-        ))
+      headings.map((heading, index) => (
+        <li>
+          <a href={`#${heading.slug}`}>
+            {index + 1} - {heading.text}
+          </a>
+        </li>
+      ))
     }
-</ol>
-
-  <!--content -->
-
-  <Content/>
+  </ol>
 
   <div class="my-20">
     <a href="#btn-back">Ir arriba</a>

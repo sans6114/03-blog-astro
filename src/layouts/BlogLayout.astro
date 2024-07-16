@@ -1,10 +1,9 @@
 ---
-import ViewTransitions from 'astro/components/ViewTransitions.astro'
-import '../styles/blog.css'
+import "../styles/blog.css";
 // interface Props {
 //     title?: string,
 // }
-const {title} = Astro.props //...rest
+const { title } = Astro.props; //...rest
 // const frontmatter = rest.frontmatter
 // console.log(frontmatter)
 ---
@@ -16,19 +15,11 @@ const {title} = Astro.props //...rest
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <ViewTransitions/>
   </head>
   <body class="bg-gray-400">
-
-    <main class="mb-10 max-5-xl m-auto container mx-auto px-4 flex flex-col items-center">
-        <a
-        href="/"
-        id="btn-back"
-        class="middle none center mr-3 rounded-lg bg-pink-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none my-4"
-        data-ripple-light="true"
-      >
-        Regresar
-      </a>
+    <main
+      class="mb-10 max-5-xl m-auto container mx-auto px-4 flex flex-col items-center w-screen"
+    >
       <slot />
     </main>
     <script src="../../node_modules/preline/dist/preline.js"></script>

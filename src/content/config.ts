@@ -5,13 +5,15 @@ import {
 
 const blogCollection = defineCollection({
     type: 'content',
-    schema: z.object({
+    schema: ({image}) => z.object({
         title: z.string(),
         date: z.date(),
         description: z.string(),
-        image: z.string(),
-        //relacion
         author: z.string(),
+        //relacion
+        image: image().refine(img => img.width > 500, {
+            message: 'image should be lower than 500px'
+        }),
         //relacion
         tags: z.array(z.string()),
     })
