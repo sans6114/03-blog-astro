@@ -26,29 +26,29 @@ const { page } = Astro.props;
       </h1>
   </div>
 
-  <section class="bg-gray-900 mx-2 rounded-3xl py-2 shadow-xl" aria-label="Entradas de blog">
-    <div class="flex flex-col md:flex-row justify-center items-center md:items-between w-3/6 md:w-full mx-auto">
-        {page.data.map((post) => <TypedBlogPost post={post}/>)}
+  <section class="bg-gray-400 bg-opacity-75 mx-2 md:mx-auto rounded-3xl py-2 shadow-xl md:max-w-4xl" aria-label="Entradas de blog">
+    <div class="flex flex-col md:flex-row justify-center items-center w-3/6 md:w-full mx-auto">
+        {page.data.map((post) => <TypedBlogPost class="paginado" post={post}/>)}
       </div> 
   </section>
 
-  <section aria-label="Controles" class="flex justify-between mt-10">
+  <section aria-label="Controles" class="flex justify-center mt-10">
 
 <!--   page .. ?? prev   -->
-    <a
-      href={page.url.prev}
-      class:list={{
-        disabled: !page.url.prev,
-      }}>Anteriores</a
-    >
+<div class="flex justify-between gap-5 border-2 mb-3">
+        <a
+          href={page.url.prev}
+          class:list={["join-item btn", { disabled: !page.url.prev }]}
+          >« Anterior</a
+        >
+        <button class="join-item btn">Page {page.currentPage}</button>
+        <a
+          href={page.url.next}
+          class:list={["join-item btn", { disabled: !page.url.next }]}
+          >Siguiente »</a
+        >
+      </div>
     
-<!--   page .. ?? next   -->
-    <a
-      href={page.url.next}
-      class:list={{
-        disabled: !page.url.next,
-      }}>Siguientes</a
-    >
   </section>
 </MainLayout>
 

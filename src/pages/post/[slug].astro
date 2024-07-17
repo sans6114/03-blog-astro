@@ -17,7 +17,7 @@ const { post } = Astro.props;
 const frontmatter = post.data;
 
 const { Content, headings } = await post.render();
-//console.log(headings)
+console.log(post)
 ---
 
 <BlogLayout title={frontmatter.title}>
@@ -26,20 +26,9 @@ const { Content, headings } = await post.render();
     id="btn-back"
     class="middle none center mr-3 rounded-lg bg-pink-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none my-4"
     data-ripple-light="true"
-  >
+    >
     Regresar
   </a>
-  <!--content -->
-  <Image
-    class="object-cover h-56 w-full rounded-lg lg:w-64"
-    src={frontmatter.image}
-    alt={frontmatter.title}
-    width={600}
-    quality="low"
-    loading="lazy"
-  />
-  <Content />
-
   <!--tabla de contenidos -->
   <h3>Tabla de contenidos</h3>
   <ol>
@@ -53,6 +42,18 @@ const { Content, headings } = await post.render();
       ))
     }
   </ol>
+  <!--content -->
+  <h1 class="text-xs text-gray-500 mb-0">{frontmatter.title}</h1>
+  <Image
+    class="object-cover h-56 w-full rounded-lg lg:w-64"
+    src={frontmatter.image}
+    alt={frontmatter.title}
+    width={600}
+    quality="low"
+    loading="lazy"
+  />
+  <Content/>
+
 
   <div class="my-20">
     <a href="#btn-back">Ir arriba</a>

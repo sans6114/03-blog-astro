@@ -7,6 +7,7 @@ import Image from 'astro/components/Image.astro';
 // console.log(frontmatter)
 interface Props {
   post: CollectionEntry<'blog'>
+  class?: string
 }
 const {post} = Astro.props
 
@@ -14,9 +15,9 @@ const frontmatter = post.data
 
 
 ---
-<div class="flex flex-col w-[350px] md:w-full bg-white shadow-2xl rounded-3xl items-center p-4 md:p-2 m-2 md:h-[450px] md:mt-[100px]">
+<div class="flex flex-col w-[350px] bg-white shadow-2xl rounded-3xl items-center p-4 md:p-2 m-2 md:h-[400px] md:mt-[100px]">
     <Image
-     class="object-cover h-56 rounded-lg lg:w-64"
+     class="object-cover h-56 rounded-lg lg:w-full"
       src={frontmatter.image}
        alt={frontmatter.title}
        width={400}
@@ -24,8 +25,8 @@ const frontmatter = post.data
        loading="lazy"
        />
 
-    <div class="flex flex-col justify-between py-6 lg:mx-6">
-        <a href={`/post/${post.slug}`} class="text-xl font-semibold text-gray-800 hover:underline">
+    <div class="flex flex-col justify-between py-6 text-center gap-2">
+        <a href={`/post/${post.slug}`} class=" text-xl font-semibold text-gray-800 hover:underline">
             {frontmatter.description}
         </a>
         
