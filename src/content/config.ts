@@ -17,7 +17,11 @@ const blogCollection = defineCollection({
         //author: z.string(),
         author: reference('author'),
         //relacion
-        tags: reference('tags'),
+        tags:  z.array(z.string()),
+
+
+        //boolean
+        isDraft: z.boolean().default(false),
     })
 })
 
@@ -28,20 +32,26 @@ const authorCollection = defineCollection({
         name: z.string(),
         avatar: image().refine((img) => img.width > 300, {
             message: 'you image should be lower than 300px'
-        })
+        }),
+        twitter: z.string(),
+        linkedIn: z.string(),
+        github: z.string(),
+        bio: z.string(),
+        subtitle: z.string()
+
     })
 })
 
-const tagsCollection = defineCollection({
-    type: 'data',
-    schema: () => z.object({
-    tags:  z.array(z.string())
-    })
-})
+// const tagsCollection = defineCollection({
+//     type: 'data',
+//     schema: () => z.object({
+   
+//     })
+// })
 
 
 export const collections = {
     blog: blogCollection,
     author: authorCollection,
-    tags: tagsCollection
+    //tags: tagsCollection
 }

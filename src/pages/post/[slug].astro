@@ -1,8 +1,10 @@
 ---
+
 import Image from "astro/components/Image.astro";
 import { getCollection } from "astro:content";
 import BlogLayout from "../../layouts/BlogLayout.astro";
 import type { GetStaticPaths } from "astro";
+import { getEntry } from "astro:content";
 
 export const getStaticPaths = (async () => {
   const posts = await getCollection("blog");
@@ -15,9 +17,12 @@ export const getStaticPaths = (async () => {
 const { post } = Astro.props;
 
 const frontmatter = post.data;
+const author = (await getEntry('author', post.data.author.id)).data
+
+
 
 const { Content, headings } = await post.render();
-console.log(post)
+//console.log(post)
 ---
 
 <BlogLayout title={frontmatter.title}>
@@ -43,7 +48,24 @@ console.log(post)
     }
   </ol>
   <!--content -->
-  <h1 class="text-xs text-gray-500 mb-0">{frontmatter.title}</h1>
+  <h1 class="text-xl text-gray-500 mb-0">{frontmatter.title}</h1>
+   <div class="flex flex-row items-center justify-start">
+    <Image
+    class="object-cover w-10 rounded-full"
+    src={author.avatar}
+    alt={frontmatter.title}
+    width={600}
+    quality="low"
+    loading="lazy"
+  />
+
+  <div class="flex">
+<a href={`/blog/${frontmatter.author.id}`}>
+  {author.name}
+</a>    
+
+  </div>
+   </div>
   <Image
     class="object-cover h-56 w-full rounded-lg lg:w-64"
     src={frontmatter.image}

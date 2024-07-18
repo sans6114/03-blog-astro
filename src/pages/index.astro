@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from 'astro:transitions'
+import { ViewTransitions } from "astro:transitions";
 //import type {PostProps} from '../interfaces/post-interface'
 //import type { GetStaticPaths } from "astro";
 import MainLayout from "../layouts/MainLayout.astro";
@@ -8,22 +8,32 @@ import { getCollection } from "astro:content";
 import TypedBlogPost from "src/components/TypedBlogPost.astro";
 //import BlogPost from "../components/BlogPost.astro";
 
-const posts = await getCollection('blog')
-//console.log(posts)
+const posts = await getCollection(
+  "blog",
 
+  (post) => post.data.isDraft === false
+);
+//console.log(posts)
 ---
 
 <MainLayout title="Santi-blog">
   <!-- component -->
-  <section class="bg-white bg-opacity-50 shadow-2xl rounded-xl" transition:animate="fade">
+  <section
+    class="bg-white bg-opacity-50 shadow-2xl rounded-xl"
+    transition:animate="fade"
+  >
     <div class="container px-6 py-10 mx-auto">
-      <h1 class="text-center text-3xl font-semibold text-gray-800 capitalize lg:text-4xl mt-10">
+      <h1
+        class="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl mt-10"
+      >
         {siteConfig.title}
       </h1>
 
-       <div class="flex flex-col md:flex-row justify-center items-center md:items-between w-3/6 md:w-full mx-auto">
-        {posts.map((post) => <TypedBlogPost post={post}/>)}
-      </div> 
+      <div
+        class="flex flex-col md:flex-row justify-center items-center md:items-between w-3/6 md:w-full mx-auto"
+      >
+        {posts.map((post) => <TypedBlogPost post={post} />)}
+      </div>
     </div>
   </section>
 </MainLayout>
