@@ -20,8 +20,14 @@
     "@preline/overlay": "^2.3.0",
     "@preline/tabs": "^2.3.0",
     "astro": "^4.11.5",
+    "markdown-it": "^14.1.0",
     "preline": "^2.3.0",
+    "sanitize-html": "^2.13.0",
     "tailwindcss": "^3.4.4",
     "typescript": "^5.5.3"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^14.1.1",
+    "@types/sanitize-html": "^2.11.0"
   }
 }
